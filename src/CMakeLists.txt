@@ -82,7 +82,7 @@ ENDIF(TCLAP_DIRECTORY-NOTFOUND)
 # Find Git
 MESSAGE(STATUS "Check for GIT")
 SET(GIT_NAMES git eg)
-FIND_PROGRAM(GIT_EXECUTABLE 
+FIND_PROGRAM(GIT_EXECUTABLE
   NAMES ${GIT_NAMES}
   DOC "Git command line client"
 )
@@ -152,6 +152,8 @@ add_subdirectory(IntensityStandardization)
 add_subdirectory(MotionEstimation)
 add_subdirectory(SuperResolution)
 add_subdirectory(Tools)
+
+add_subdirectory(ReadTransform)
 
 #add_subdirectory(Test)
 # add_subdirectory(CRKit/Segmentation)

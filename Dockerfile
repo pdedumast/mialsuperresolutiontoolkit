@@ -32,22 +32,24 @@ RUN apt-get update && apt-get install software-properties-common -y && apt-add-r
 # Set the working directory to /mialsuperresolutiontoolkit
 WORKDIR mialsuperresolutiontoolkit
 
+RUN mkdir /results
+
 # Copy the current directory contents into the container at /app
 COPY . /mialsuperresolutiontoolkit
 
 WORKDIR /mialsuperresolutiontoolkit/build
 
 # # Git clone the repo from MIALSRTK official repository on GitHub. #
-#RUN mkdir /opt/mialsrtk-build && cd /opt/mialsrtk-build \ 
+#RUN mkdir /opt/mialsrtk-build && cd /opt/mialsrtk-build \
 #&& git clone https://github.com/sebastientourbier/mialsuperresolutiontoolkit.git \
-#&& cd mialsuperresolutiontoolkit \ 
+#&& cd mialsuperresolutiontoolkit \
 #&& git checkout master && mkdir build
 
 #WORKDIR /opt/mialsrtk-build/mialsuperresolutiontoolkit/build
 
-RUN cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local -D USE_OMP:BOOL=ON ../src \ 
-&& make -j2 && sudo make install && cd .. 
+RUN cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local -D USE_OMP:BOOL=ON ../src \
+&& make -j8 && sudo make install && cd .. 
 
-ENV BIN_DIR "/usr/local/bin" 
+ENV BIN_DIR "/usr/local/bin"
 ENV DISPLAY :0
 #&& make install && make clean && cd .. && rm -rf build
